@@ -1,4 +1,5 @@
 #include "RSDK/Core/RetroEngine.hpp"
+#include "../../Overlays/Video/VideoOverlay.hpp"
 
 using namespace RSDK;
 
@@ -22,6 +23,9 @@ void (*RSDK::globalVarsInitCB)(void *globals) = NULL;
 
 RetroEngine RSDK::engine = RetroEngine();
 
+OverlaySlot     RSDK::g_videoOverlaySlot = {};
+VideoOverlayAPI *RSDK::g_videoOverlayAPI = nullptr;
+
 int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 {
     ParseArguments(argc, argv);
@@ -31,6 +35,7 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
     RenderDevice::isRunning = false;
 
     if (InitStorage()) {
+        Overlay_Init();
         SKU::InitUserCore();
         LoadSettingsINI();
 
@@ -323,6 +328,10 @@ int32 RSDK::RunRetroEngine(int32 argc, char *argv[])
 
     // Shutdown
 
+    Overlay_Unload(&g_videoOverlaySlot);
+    g_videoOverlayAPI = nullptr;
+    Overlay_Shutdown();
+
     ReleaseInputDevices();
     AudioDevice::Release();
     RenderDevice::Release(false);
@@ -519,7 +528,15 @@ void RSDK::ProcessEngine()
 
         case ENGINESTATE_VIDEOPLAYBACK:
             ProcessInput();
-            ProcessVideo();
+            if (g_videoOverlayAPI && g_videoOverlayAPI->IsPlaying()) {
+#if RETRO_USE_MOD_LOADER
+                RunModCallbacks(MODCB_ONVIDEOSKIPCB, (void *)engine.skipCallback);
+#endif
+                if (engine.skipCallback && engine.skipCallback())
+                    g_videoOverlayAPI->StopVideo();
+                else
+                    g_videoOverlayAPI->UpdateFrame();
+            }
             break;
 
         case ENGINESTATE_SHOWIMAGE:
@@ -735,6 +752,7 @@ void RSDK::InitEngine()
 #if RETRO_USE_MOD_LOADER
     RunModCallbacks(MODCB_ONGAMESTARTUP, NULL); // rerun those callbacks
 #endif
+
 }
 
 void RSDK::StartGameObjects()

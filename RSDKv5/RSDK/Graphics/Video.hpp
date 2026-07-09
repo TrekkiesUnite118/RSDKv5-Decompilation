@@ -23,7 +23,7 @@ struct VideoManager {
 };
 
 bool32 LoadVideo(const char *filename, double startDelay, bool32 (*skipCallback)());
-void ProcessVideo();
+//void ProcessVideo();
 
 } // namespace RSDK
 

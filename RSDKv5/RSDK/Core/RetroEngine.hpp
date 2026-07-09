@@ -541,6 +541,9 @@ extern "C" {
 
 #include <theora/theoradec.h>
 
+#include "Overlay.hpp"
+#include "../../Overlays/Video/VideoOverlay.hpp"
+
 // ============================
 // ENGINE INCLUDES
 // ============================
@@ -696,6 +699,10 @@ inline void SetGameFinished() { sceneInfo.state = ENGINESTATE_GAME_FINISHED; }
 #endif
 
 extern int32 *globalVarsPtr;
+
+// Video overlay slot and its type-safe API pointer.
+extern OverlaySlot    g_videoOverlaySlot;
+extern VideoOverlayAPI *g_videoOverlayAPI;
 
 #if RETRO_REV0U
 extern void (*globalVarsInitCB)(void *globals);

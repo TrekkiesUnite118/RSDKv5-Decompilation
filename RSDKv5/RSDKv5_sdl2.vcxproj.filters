@@ -308,6 +308,9 @@
     <ClCompile Include="..\dependencies\all\iniparser\iniparser.cpp">
       <Filter>Source Files\Dependencies\iniparser</Filter>
     </ClCompile>
+    <ClCompile Include="Overlay.cpp">
+      <Filter>Source Files\RSDK\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\dependencies\all\tinyxml2\tinyxml2.h">
@@ -516,6 +519,9 @@
     </ClInclude>
     <ClInclude Include="..\dependencies\all\iniparser\iniparser.h">
       <Filter>Source Files\Dependencies\iniparser</Filter>
+    </ClInclude>
+    <ClInclude Include="Overlay.hpp">
+      <Filter>Source Files\RSDK\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

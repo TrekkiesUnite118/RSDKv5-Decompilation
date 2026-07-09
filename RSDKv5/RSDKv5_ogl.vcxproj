@@ -467,26 +467,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -548,12 +548,12 @@
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/$(Configuration)/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/$(Configuration)/;$(SolutionDir)dependencies/ogl/glfw/lib/;$(SolutionDir)dependencies/ogl/glfw/lib-vc2022/;$(SolutionDir)dependencies/ogl/glew/lib/Release/$(Platform)/;</AdditionalLibraryDirectories>
       <AdditionalDependencies>libogg.lib;libtheora_static.lib;winmm.lib;comctl32.lib;opengl32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-      <PostBuildEvent>
-        <Command>copy /Y "$(SolutionDir)dependencies\ogl\glew\bin\Release\$(Platform)\glew32.dll" "$(OutDir)" </Command>
-      </PostBuildEvent>
-      <PostBuildEvent>
-        <Message>copying GLEW library DLL to the build directory. build should fail if it's not found</Message>
-      </PostBuildEvent>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)dependencies\ogl\glew\bin\Release\$(Platform)\glew32.dll" "$(OutDir)" </Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>copying GLEW library DLL to the build directory. build should fail if it's not found</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -573,12 +573,12 @@
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/$(Configuration)/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/$(Configuration)/;$(SolutionDir)dependencies/ogl/glfw/lib/;$(SolutionDir)dependencies/ogl/glfw/lib-vc2022/;$(SolutionDir)dependencies/ogl/glew/lib/Release/$(Platform)/;</AdditionalLibraryDirectories>
       <AdditionalDependencies>libogg.lib;libtheora_static.lib;winmm.lib;comctl32.lib;opengl32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-      <PostBuildEvent>
-        <Command>copy /Y "$(SolutionDir)dependencies\ogl\glew\bin\Release\$(Platform)\glew32.dll" "$(OutDir)" </Command>
-      </PostBuildEvent>
-      <PostBuildEvent>
-        <Message>copying GLEW library DLL to the build directory. build should fail if it's not found</Message>
-      </PostBuildEvent>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)dependencies\ogl\glew\bin\Release\$(Platform)\glew32.dll" "$(OutDir)" </Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>copying GLEW library DLL to the build directory. build should fail if it's not found</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -602,12 +602,12 @@
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/$(Configuration)/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/$(Configuration)/;$(SolutionDir)dependencies/ogl/glfw/lib/;$(SolutionDir)dependencies/ogl/glfw/lib-vc2022/;$(SolutionDir)dependencies/ogl/glew/lib/Release/$(Platform)/;</AdditionalLibraryDirectories>
       <AdditionalDependencies>libogg.lib;libtheora_static.lib;winmm.lib;comctl32.lib;opengl32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-      <PostBuildEvent>
-        <Command>copy /Y "$(SolutionDir)dependencies\ogl\glew\bin\Release\$(Platform)\glew32.dll" "$(OutDir)" </Command>
-      </PostBuildEvent>
-      <PostBuildEvent>
-        <Message>copying GLEW library DLL to the build directory. build should fail if it's not found</Message>
-      </PostBuildEvent>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)dependencies\ogl\glew\bin\Release\$(Platform)\glew32.dll" "$(OutDir)" </Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>copying GLEW library DLL to the build directory. build should fail if it's not found</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -631,12 +631,12 @@
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies/windows/libtheora/win32/VS2010/$(Platform)/$(Configuration)/;$(SolutionDir)dependencies/windows/libogg/win32/VS2015/$(Platform)/$(Configuration)/;$(SolutionDir)dependencies/ogl/glfw/lib/;$(SolutionDir)dependencies/ogl/glfw/lib-vc2022/;$(SolutionDir)dependencies/ogl/glew/lib/Release/$(Platform)/;</AdditionalLibraryDirectories>
       <AdditionalDependencies>libogg.lib;libtheora_static.lib;winmm.lib;comctl32.lib;opengl32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-      <PostBuildEvent>
-        <Command>copy /Y "$(SolutionDir)dependencies\ogl\glew\bin\Release\$(Platform)\glew32.dll" "$(OutDir)" </Command>
-      </PostBuildEvent>
-      <PostBuildEvent>
-        <Message>copying GLEW library DLL to the build directory. build should fail if it's not found</Message>
-      </PostBuildEvent>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)dependencies\ogl\glew\bin\Release\$(Platform)\glew32.dll" "$(OutDir)" </Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>copying GLEW library DLL to the build directory. build should fail if it's not found</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

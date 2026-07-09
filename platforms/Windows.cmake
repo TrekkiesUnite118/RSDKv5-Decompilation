@@ -18,6 +18,7 @@ else()
     message("found libogg")
     add_library(libogg ALIAS Ogg::ogg)
     target_link_libraries(RetroEngine libogg)
+    target_link_libraries(VideoOverlay libogg)
 endif()
 
 # i don't like this but it's what's on vcpkg so
@@ -34,12 +35,16 @@ if(NOT unofficial-theora_FOUND)
         message("found libtheora")
         add_library(libtheora ALIAS Theora::theora) # my best guess
         target_link_libraries(RetroEngine libtheora)
+        target_link_libraries(VideoOverlay libtheora)
     endif()
 else()
     message("found libtheora")
     add_library(libtheora ALIAS unofficial::theora::theora)
     target_link_libraries(RetroEngine libtheora)
+    target_link_libraries(VideoOverlay libtheora)
 endif()
+
+target_include_directories(VideoOverlay PRIVATE dependencies/${DEP_PATH}/)
 
 if(RETRO_SUBSYSTEM STREQUAL "DX9")
     target_link_libraries(RetroEngine

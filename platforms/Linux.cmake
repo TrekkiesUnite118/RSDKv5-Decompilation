@@ -12,6 +12,9 @@ option(USE_SDL_AUDIO "Whether or not to use SDL for audio instead of the default
 find_package(Threads REQUIRED)
 target_link_libraries(RetroEngine Threads::Threads)
 
+# dlopen/dlsym/dlclose used by Overlay.cpp in the main engine.
+target_link_libraries(RetroEngine dl)
+
 pkg_check_modules(OGG ogg)
 
 if(NOT OGG_FOUND)
@@ -22,6 +25,8 @@ else()
     target_link_libraries(RetroEngine ${OGG_STATIC_LIBRARIES})
     target_link_options(RetroEngine PRIVATE ${OGG_STATIC_LDLIBS_OTHER})
     target_compile_options(RetroEngine PRIVATE ${OGG_STATIC_CFLAGS})
+    target_link_libraries(VideoOverlay ${OGG_STATIC_LIBRARIES})
+    target_compile_options(VideoOverlay PRIVATE ${OGG_STATIC_CFLAGS})
 endif()
 
 pkg_check_modules(THEORA theora theoradec)
@@ -34,6 +39,8 @@ else()
     target_link_libraries(RetroEngine ${THEORA_STATIC_LIBRARIES})
     target_link_options(RetroEngine PRIVATE ${THEORA_STATIC_LDLIBS_OTHER})
     target_compile_options(RetroEngine PRIVATE ${THEORA_STATIC_CFLAGS})
+    target_link_libraries(VideoOverlay ${THEORA_STATIC_LIBRARIES})
+    target_compile_options(VideoOverlay PRIVATE ${THEORA_STATIC_CFLAGS})
 endif()
 
 if(RETRO_SUBSYSTEM STREQUAL "OGL")

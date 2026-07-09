@@ -23,6 +23,7 @@ set(RETRO_OUTPUT_NAME ${RETRO_NAME} CACHE STRING "The exported name of the execu
 set(RETRO_FILES
     RSDKv5/main.cpp
     RSDKv5/RSDK/Core/RetroEngine.cpp
+    RSDKv5/RSDK/Core/Overlay.cpp
     RSDKv5/RSDK/Core/Math.cpp
     RSDKv5/RSDK/Core/Reader.cpp
     RSDKv5/RSDK/Core/Link.cpp
@@ -53,6 +54,22 @@ set(RETRO_FILES
     dependencies/all/iniparser/iniparser.cpp
     dependencies/all/iniparser/dictionary.cpp
     dependencies/all/miniz/miniz.c
+)
+
+# VideoOverlay — runtime-loaded shared library for video playback.
+# MODULE = not linked at build time; loaded via LoadLibrary/dlopen.
+add_library(VideoOverlay MODULE
+    RSDKv5/Overlays/Video/VideoOverlay.cpp
+)
+# Designated initialisers in VideoOverlay.cpp require C++20.
+set_target_properties(VideoOverlay PROPERTIES
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    PREFIX ""
+)
+target_include_directories(VideoOverlay PRIVATE
+    RSDKv5/
+    dependencies/all/
 )
 
 if(NOT PLATFORM)
@@ -90,7 +107,9 @@ if(COMPILE_OGG)
 
     target_include_directories(libogg PRIVATE ${OGG_DIR}/include)
     target_include_directories(RetroEngine PRIVATE ${OGG_DIR}/include)
+    target_include_directories(VideoOverlay PRIVATE ${OGG_DIR}/include)
     target_link_libraries(RetroEngine libogg)
+    target_link_libraries(VideoOverlay libogg)
 endif()
 
 if(COMPILE_THEORA)
@@ -130,8 +149,16 @@ if(COMPILE_THEORA)
 
     target_include_directories(libtheora PRIVATE ${THEORA_DIR}/include ${OGG_DIR}/include)
     target_include_directories(RetroEngine PRIVATE ${THEORA_DIR}/include)
+    target_include_directories(VideoOverlay PRIVATE ${THEORA_DIR}/include)
     target_link_libraries(RetroEngine libtheora)
+    target_link_libraries(VideoOverlay libtheora)
 endif()
+
+# Copy VideoOverlay next to the engine executable so it's found at runtime.
+add_custom_command(TARGET VideoOverlay POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        $<TARGET_FILE:VideoOverlay>
+        $<TARGET_FILE_DIR:RetroEngine>)
 
 target_include_directories(RetroEngine PRIVATE
     RSDKv5/
